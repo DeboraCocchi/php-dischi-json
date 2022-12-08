@@ -18,20 +18,31 @@
 <body>
   <div id="app" class="dc-cont">
     <div class="container-fluid">
-      <div class="row flex-wrap">
+      <div class="row flex-wrap position-relative">
         <h1 class="mt-3">Choose an Album</h1>
             <div class="col-4 text-center dc-card" 
               v-for="(disk, index) in disks"
               :key="index">
-              <div class="dc-card-content">
+              <div class="dc-card-content" @click.stop="hasBeenClicked(index)">
               <div class="img-dc-cont">
               <img :src="disk.poster" :alt="disk.title">
               </div>
               <h4>{{disk.title}}</h4>
               <h6>{{disk.author}}</h6>
-            </div>
+
+              <div class="dc-details position-absolute" v-show="isClicked">
+              <div class="dc-card-details">
+              <i class="fa-solid fa-xmark" @click.stop="closeDetails()"></i>
+                <img :src="details.poster" alt="details.title">
+                <h4>{{details.title}}</h4>
+                <h3>{{details.author}}</h3>
+                <h5>{{details.year}}</h5>
+                <h6>{{details.genre}}</h6>
               </div>
-              
+            </div>
+            </div>
+            
+      </div>       
       </div>
     </div>
   </div>
